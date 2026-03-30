@@ -1,20 +1,26 @@
-import { useRef, FormEvent } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, Send, CheckCircle, AlertCircle, MapPin, Clock } from 'lucide-react'
+import { Mail, Github, Linkedin, MapPin, BadgeCheck, Download, ExternalLink, Phone } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Button } from '@/components/ui/Button'
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { setContactFormStatus } from '@/features/ui/uiSlice'
-import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations'
+import { fadeInUp, staggerContainer } from '@/lib/animations'
 
-const contactInfo = [
+const contactLinks = [
   {
     icon: Mail,
     label: 'Email',
     value: 'sowmya.bantupalli1@gmail.com',
     href: 'mailto:sowmya.bantupalli1@gmail.com',
     color: '#6366f1',
+    external: false,
+  },
+  {
+    icon: Phone,
+    label: 'Phone',
+    value: '+1 (647) 641-2301',
+    href: 'tel:+16476412301',
+    color: '#10b981',
+    external: false,
   },
   {
     icon: Linkedin,
@@ -22,6 +28,7 @@ const contactInfo = [
     value: 'linkedin.com/in/sowmya-b-9a3a16240',
     href: 'https://www.linkedin.com/in/sowmya-b-9a3a16240',
     color: '#0a66c2',
+    external: true,
   },
   {
     icon: Github,
@@ -29,143 +36,25 @@ const contactInfo = [
     value: 'github.com/SowmyaBantupalli',
     href: 'https://github.com/SowmyaBantupalli',
     color: '#e2e8f0',
+    external: true,
   },
   {
     icon: MapPin,
     label: 'Location',
     value: 'Mississauga, ON · Canada',
     href: undefined,
-    color: '#10b981',
+    color: '#f59e0b',
+    external: false,
   },
   {
-    icon: Clock,
+    icon: BadgeCheck,
     label: 'Work Authorization',
     value: 'Permanent Resident of Canada',
     href: undefined,
-    color: '#f59e0b',
+    color: '#10b981',
+    external: false,
   },
 ]
-
-function ContactForm() {
-  const dispatch = useAppDispatch()
-  const status = useAppSelector((s) => s.ui.contactFormStatus)
-  const formRef = useRef<HTMLFormElement>(null)
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    dispatch(setContactFormStatus('loading'))
-
-    // Simulate API call — in production connect to your backend/Formspree/EmailJS
-    await new Promise((resolve) => setTimeout(resolve, 1800))
-
-    // Simulate success
-    dispatch(setContactFormStatus('success'))
-    formRef.current?.reset()
-
-    // Reset after 5 seconds
-    setTimeout(() => dispatch(setContactFormStatus('idle')), 5000)
-  }
-
-  return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" noValidate>
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <label htmlFor="name" className="text-sm font-medium text-dark-300">
-            Full Name <span className="text-brand-400">*</span>
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            placeholder="Jane Smith"
-            className="w-full px-4 py-2.5 rounded-xl bg-dark-800 border border-dark-600 text-white placeholder:text-dark-500 focus:outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/20 transition-all duration-200 text-sm"
-          />
-        </div>
-        <div className="space-y-1.5">
-          <label htmlFor="email" className="text-sm font-medium text-dark-300">
-            Email Address <span className="text-brand-400">*</span>
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="jane@company.com"
-            className="w-full px-4 py-2.5 rounded-xl bg-dark-800 border border-dark-600 text-white placeholder:text-dark-500 focus:outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/20 transition-all duration-200 text-sm"
-          />
-        </div>
-      </div>
-
-      <div className="space-y-1.5">
-        <label htmlFor="subject" className="text-sm font-medium text-dark-300">
-          Subject <span className="text-brand-400">*</span>
-        </label>
-        <input
-          id="subject"
-          name="subject"
-          type="text"
-          required
-          placeholder="Senior Frontend Developer Role at Acme Corp"
-          className="w-full px-4 py-2.5 rounded-xl bg-dark-800 border border-dark-600 text-white placeholder:text-dark-500 focus:outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/20 transition-all duration-200 text-sm"
-        />
-      </div>
-
-      <div className="space-y-1.5">
-        <label htmlFor="message" className="text-sm font-medium text-dark-300">
-          Message <span className="text-brand-400">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={5}
-          placeholder="Tell me about your project, role, or opportunity..."
-          className="w-full px-4 py-2.5 rounded-xl bg-dark-800 border border-dark-600 text-white placeholder:text-dark-500 focus:outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/20 transition-all duration-200 text-sm resize-none"
-        />
-      </div>
-
-      {/* Status messages */}
-      {status === 'success' && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20"
-        >
-          <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-          <p className="text-sm text-emerald-300">
-            Message sent successfully! I'll get back to you within 24 hours.
-          </p>
-        </motion.div>
-      )}
-
-      {status === 'error' && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl bg-rose-500/10 border border-rose-500/20"
-        >
-          <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0" />
-          <p className="text-sm text-rose-300">
-            Something went wrong. Please try emailing me directly.
-          </p>
-        </motion.div>
-      )}
-
-      <Button
-        type="submit"
-        variant="primary"
-        size="lg"
-        isLoading={status === 'loading'}
-        disabled={status === 'success'}
-        rightIcon={<Send className="w-4 h-4" />}
-        className="w-full"
-      >
-        {status === 'loading' ? 'Sending...' : status === 'success' ? 'Message Sent!' : "Send Message"}
-      </Button>
-    </form>
-  )
-}
 
 export function Contact() {
   return (
@@ -175,108 +64,154 @@ export function Contact() {
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-500/4 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Get In Touch"
           title="Let's build something"
           titleHighlight="great together"
-          description="Have a challenging frontend problem, an exciting opportunity, or just want to connect? I'd love to hear from you."
+          description="Open to senior frontend engineering roles in Canada. Reach out via any channel below — I typically respond within 24 hours."
         />
 
-        <div className="grid lg:grid-cols-5 gap-10">
-          {/* Left: Contact info */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            className="lg:col-span-2 space-y-6"
-          >
-            <motion.div variants={fadeInLeft}>
-              <h3 className="text-xl font-bold text-white mb-2">Contact Information</h3>
-              <p className="text-dark-400 leading-relaxed text-sm">
-                I'm currently open to senior frontend engineering roles and consulting opportunities.
-                Reach out via any channel — I typically respond within 24 hours.
-              </p>
-            </motion.div>
-
-            <motion.div variants={staggerContainer} className="space-y-3">
-              {contactInfo.map((item) => {
-                const Icon = item.icon
-                const content = (
-                  <div className="flex items-center gap-3 p-3.5 rounded-xl bg-dark-800/60 border border-dark-700/40 hover:border-dark-600/60 transition-all duration-200">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: `${item.color}15` }}
-                    >
-                      <Icon className="w-4.5 h-4.5" style={{ color: item.color, width: '18px', height: '18px' }} />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-xs font-medium text-dark-500 uppercase tracking-wide">
-                        {item.label}
-                      </p>
-                      <p className="text-sm font-medium text-dark-200 truncate">{item.value}</p>
-                    </div>
-                  </div>
-                )
-
-                return (
-                  <motion.div key={item.label} variants={fadeInLeft}>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target={item.href.startsWith('http') ? '_blank' : undefined}
-                        rel="noopener noreferrer"
-                        className="block group"
-                      >
-                        {content}
-                      </a>
-                    ) : (
-                      content
-                    )}
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-
-            {/* CTA callout */}
-            <motion.div
-              variants={fadeInLeft}
-              className="p-5 rounded-2xl bg-gradient-to-br from-brand-500/10 via-accent-violet/5 to-transparent border border-brand-500/20"
-            >
-              <p className="text-white font-semibold mb-1">Open to opportunities in Canada</p>
-              <p className="text-dark-400 text-sm leading-relaxed">
-                Senior Frontend Engineer, React/Angular Lead, or Frontend Architect roles.
-                Permanent Resident — no sponsorship required.
-              </p>
-              <div className="flex items-center gap-2 mt-3">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-emerald-400 text-sm font-medium">
-                  Actively looking
-                </span>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right: Contact form */}
-          <motion.div
-            variants={fadeInRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            className="lg:col-span-3"
-          >
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="space-y-6"
+        >
+          {/* Profile + intro card */}
+          <motion.div variants={fadeInUp}>
             <GlassCard hover={false} className="p-6 sm:p-8">
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-white">Send a Message</h3>
-                <p className="text-dark-400 text-sm mt-1">
-                  Fill out the form and I'll get back to you shortly.
-                </p>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                {/* Photo */}
+                <div className="flex-shrink-0">
+                  <div className="w-24 h-24 rounded-2xl ring-2 ring-brand-500/40 ring-offset-2 ring-offset-dark-800 overflow-hidden shadow-glow">
+                    <img
+                      src="/profile.jpg"
+                      alt="Sowmya Bantupalli"
+                      className="w-full h-full object-cover object-top"
+                      onError={(e) => {
+                        const t = e.currentTarget
+                        t.style.display = 'none'
+                        const parent = t.parentElement
+                        if (parent) {
+                          parent.innerHTML =
+                            '<div style="width:100%;height:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:white;font-size:1.75rem;font-weight:900">SB</div>'
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Name + title + availability */}
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="text-2xl font-bold text-white">Sowmya Bantupalli</h3>
+                  <p className="text-brand-400 font-semibold mt-0.5">Senior Frontend Engineer</p>
+                  <p className="text-dark-400 text-sm mt-1">
+                    LGS (An IBM Company) · 8+ Years Experience
+                  </p>
+                  <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-3">
+                    <span className="flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Open to Opportunities
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-300">
+                      <BadgeCheck className="w-3.5 h-3.5" />
+                      No Sponsorship Required
+                    </span>
+                  </div>
+                </div>
+
+                {/* Resume download */}
+                <div className="flex-shrink-0">
+                  <Button
+                    variant="primary"
+                    size="md"
+                    as="a"
+                    href="/Sowmya_Bantupalli_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    leftIcon={<Download className="w-4 h-4" />}
+                  >
+                    Download Resume
+                  </Button>
+                </div>
               </div>
-              <ContactForm />
             </GlassCard>
           </motion.div>
-        </div>
+
+          {/* Contact links grid */}
+          <motion.div
+            variants={staggerContainer}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3"
+          >
+            {contactLinks.map((item) => {
+              const Icon = item.icon
+              const inner = (
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-dark-800/60 border border-dark-700/40 hover:border-dark-600/60 transition-all duration-200 h-full group">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${item.color}15` }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: item.color }} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-semibold text-dark-500 uppercase tracking-wide">
+                      {item.label}
+                    </p>
+                    <p className="text-sm font-medium text-dark-200 truncate group-hover:text-white transition-colors">
+                      {item.value}
+                    </p>
+                  </div>
+                  {item.external && (
+                    <ExternalLink className="w-3.5 h-3.5 text-dark-600 group-hover:text-dark-400 transition-colors flex-shrink-0" />
+                  )}
+                </div>
+              )
+
+              return (
+                <motion.div key={item.label} variants={fadeInUp}>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
+                      className="block h-full"
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    inner
+                  )}
+                </motion.div>
+              )
+            })}
+          </motion.div>
+
+          {/* Bottom CTA */}
+          <motion.div variants={fadeInUp}>
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-brand-500/10 via-accent-violet/5 to-transparent border border-brand-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <p className="text-white font-semibold">
+                  Looking for a Senior Frontend Engineer?
+                </p>
+                <p className="text-dark-400 text-sm mt-0.5">
+                  React · Angular · TypeScript · NgRx · Azure DevOps — available in Canada, no sponsorship needed.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                size="md"
+                as="a"
+                href="mailto:sowmya.bantupalli1@gmail.com"
+                leftIcon={<Mail className="w-4 h-4" />}
+                className="flex-shrink-0"
+              >
+                Send Email
+              </Button>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )

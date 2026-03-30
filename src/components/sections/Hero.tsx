@@ -231,7 +231,7 @@ export function Hero() {
               variant="glass"
               size="xl"
               as="a"
-              href="/resume.pdf"
+              href="/Sowmya_Bantupalli_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               leftIcon={<Download className="w-5 h-5" />}
