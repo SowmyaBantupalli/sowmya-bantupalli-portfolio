@@ -100,12 +100,12 @@ function ParticleCanvas() {
 }
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/sowmya-bantupalli', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/sowmya-bantupalli', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:sowmya.bantupalli@email.com', label: 'Email' },
+  { icon: Github, href: 'https://github.com/SowmyaBantupalli', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sowmya-b-9a3a16240', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:sowmya.bantupalli1@gmail.com', label: 'Email' },
 ]
 
-const techBadges = ['React 18', 'Angular 17', 'TypeScript', 'Azure', 'AWS', 'Redux Toolkit']
+const techBadges = ['React', 'Angular', 'TypeScript', 'NgRx', 'Redux Toolkit', 'Azure DevOps']
 
 export function Hero() {
   const scrollToProjects = () => {
@@ -149,23 +149,42 @@ export function Hero() {
           animate="visible"
           className="flex flex-col items-center gap-6"
         >
+          {/* Profile photo */}
+          <motion.div variants={fadeInUp} className="relative">
+            <div className="w-28 h-28 rounded-full ring-4 ring-brand-500/40 ring-offset-4 ring-offset-dark-950 overflow-hidden shadow-glow">
+              <img
+                src="/profile.jpg"
+                alt="Sowmya Bantupalli"
+                className="w-full h-full object-cover object-top"
+                onError={(e) => {
+                  const t = e.currentTarget
+                  t.style.display = 'none'
+                  t.parentElement!.innerHTML =
+                    '<div class="w-full h-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-white text-3xl font-black">SB</div>'
+                }}
+              />
+            </div>
+            {/* Online indicator */}
+            <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-400 border-2 border-dark-950 shadow-lg" />
+          </motion.div>
+
           {/* Status badge */}
           <motion.div variants={fadeInUp}>
             <Badge variant="success" size="md" dot className="px-4 py-1.5 text-sm">
-              Available for Senior Roles
+              Open to Senior Opportunities in Canada
             </Badge>
           </motion.div>
 
           {/* Main heading */}
           <motion.div variants={fadeInUp} className="space-y-3">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tight">
-              <span className="block">Senior Frontend</span>
+              <span className="block">Sowmya Bantupalli</span>
               <span className="block bg-gradient-to-r from-brand-400 via-accent-violet to-accent-cyan bg-clip-text text-transparent animate-gradient-x">
-                Developer
+                Senior Frontend Engineer
               </span>
             </h1>
             <p className="text-xl sm:text-2xl font-medium text-dark-300 tracking-wide">
-              Angular & React Expert · 8+ Years Experience
+              React & Angular Expert · 8+ Years · Mississauga, ON
             </p>
           </motion.div>
 
@@ -174,12 +193,13 @@ export function Hero() {
             variants={fadeInUp}
             className="text-dark-300 text-lg max-w-2xl leading-relaxed"
           >
-            I architect and build{' '}
-            <span className="text-white font-semibold">high-performance, scalable</span> web
-            applications that serve millions of users. Specializing in{' '}
+            Senior Frontend Engineer at{' '}
+            <span className="text-white font-semibold">LGS (An IBM Company)</span> building
+            scalable, high-performance applications with{' '}
             <span className="text-brand-400 font-semibold">React</span> and{' '}
-            <span className="text-accent-violet font-semibold">Angular</span> ecosystems with deep
-            expertise in TypeScript, cloud infrastructure, and modern DevOps practices.
+            <span className="text-accent-violet font-semibold">Angular</span>. Expert in NgRx,
+            Redux Toolkit, CI/CD automation, and cloud observability with Azure & AWS.{' '}
+            <span className="text-white font-semibold">Permanent Resident of Canada.</span>
           </motion.p>
 
           {/* Tech stack badges */}

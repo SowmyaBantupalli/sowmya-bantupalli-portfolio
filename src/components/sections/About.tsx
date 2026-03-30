@@ -95,25 +95,48 @@ export function About() {
             viewport={{ once: true, margin: '-50px' }}
             className="space-y-6"
           >
+            {/* Profile photo (mobile/left column) */}
+            <motion.div variants={fadeInLeft} className="flex items-center gap-5">
+              <div className="w-20 h-20 rounded-2xl ring-2 ring-brand-500/40 overflow-hidden flex-shrink-0 shadow-glow">
+                <img
+                  src="/profile.jpg"
+                  alt="Sowmya Bantupalli"
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    const t = e.currentTarget
+                    t.style.display = 'none'
+                    t.parentElement!.innerHTML =
+                      '<div class="w-full h-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-white text-2xl font-black">SB</div>'
+                  }}
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Sowmya Bantupalli</h3>
+                <p className="text-brand-400 font-semibold text-sm">Senior Frontend Engineer</p>
+                <p className="text-dark-400 text-sm">LGS (An IBM Company) · Mississauga, ON</p>
+              </div>
+            </motion.div>
+
             <motion.div variants={fadeInLeft} className="space-y-4">
               <p className="text-dark-300 text-lg leading-relaxed">
                 With over{' '}
                 <span className="text-white font-semibold">8 years of frontend engineering</span>,
-                I've led development teams at companies like Microsoft, Capgemini, and Infosys,
-                delivering solutions that power millions of users globally.
-              </p>
-              <p className="text-dark-300 leading-relaxed">
-                My expertise spans the full modern frontend stack — from architecting scalable{' '}
+                I specialize in building scalable, high-performance web applications using{' '}
                 <span className="text-brand-400 font-medium">React</span> and{' '}
-                <span className="text-accent-violet font-medium">Angular</span> applications, to
-                designing component libraries, optimizing performance, and integrating cloud-native
-                solutions on{' '}
-                <span className="text-accent-cyan font-medium">Azure and AWS</span>.
+                <span className="text-accent-violet font-medium">Angular</span> at{' '}
+                <span className="text-white font-semibold">LGS (An IBM Company)</span>.
               </p>
               <p className="text-dark-300 leading-relaxed">
-                I believe great software is built at the intersection of technical excellence and
-                deep user empathy. When I'm not shipping code, I'm mentoring developers, contributing
-                to open source, or exploring the latest in web performance and AI.
+                Expert in architecting reusable UI component libraries, optimizing state management
+                with <span className="text-brand-400 font-medium">NgRx</span> and{' '}
+                <span className="text-accent-violet font-medium">Redux Toolkit</span>, and
+                streamlining CI/CD pipelines via{' '}
+                <span className="text-accent-cyan font-medium">Azure DevOps</span> and Argo CD.
+              </p>
+              <p className="text-dark-300 leading-relaxed">
+                AWS and Azure certified professional focused on integrating RESTful services,
+                improving application reliability through robust unit testing, and driving
+                observability via Grafana and Dynatrace.
               </p>
             </motion.div>
 
@@ -121,11 +144,11 @@ export function About() {
             <motion.div variants={fadeInLeft} className="flex flex-wrap gap-3">
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-800 border border-dark-700 text-sm text-dark-300">
                 <MapPin className="w-4 h-4 text-brand-400" />
-                Remote-First (US/India)
+                Mississauga, ON · Canada
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Open to Opportunities
+                Permanent Resident — Work Authorized
               </div>
             </motion.div>
 

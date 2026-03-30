@@ -3,9 +3,9 @@ import { Github, Linkedin, Mail, Code2, Heart, ExternalLink } from 'lucide-react
 import { navItems } from '@/data/navigation'
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com/sowmya-bantupalli', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/sowmya-bantupalli', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:sowmya.bantupalli@email.com', label: 'Email' },
+  { icon: Github, href: 'https://github.com/SowmyaBantupalli', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sowmya-b-9a3a16240', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:sowmya.bantupalli1@gmail.com', label: 'Email' },
 ]
 
 export function Footer() {
@@ -80,30 +80,30 @@ export function Footer() {
             </h4>
             <div className="space-y-3">
               <a
-                href="mailto:sowmya.bantupalli@email.com"
+                href="mailto:sowmya.bantupalli1@gmail.com"
                 className="flex items-center gap-2.5 text-sm text-dark-400 hover:text-white transition-colors group"
               >
                 <Mail className="w-4 h-4 text-brand-400" />
-                sowmya.bantupalli@email.com
+                sowmya.bantupalli1@gmail.com
               </a>
               <a
-                href="https://linkedin.com/in/sowmya-bantupalli"
+                href="https://www.linkedin.com/in/sowmya-b-9a3a16240"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 text-sm text-dark-400 hover:text-white transition-colors group"
               >
                 <Linkedin className="w-4 h-4 text-brand-400" />
-                linkedin.com/in/sowmya-bantupalli
+                linkedin.com/in/sowmya-b-9a3a16240
                 <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100" />
               </a>
               <a
-                href="https://github.com/sowmya-bantupalli"
+                href="https://github.com/SowmyaBantupalli"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 text-sm text-dark-400 hover:text-white transition-colors group"
               >
                 <Github className="w-4 h-4 text-brand-400" />
-                github.com/sowmya-bantupalli
+                github.com/SowmyaBantupalli
                 <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100" />
               </a>
             </div>

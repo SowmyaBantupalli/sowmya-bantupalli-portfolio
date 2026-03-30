@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
-import { Award, ExternalLink, Cloud, Server, Brain, GitBranch, Code, Calendar } from 'lucide-react'
+import { Award, ExternalLink, Cloud, Server, Brain, GitBranch, Code, Calendar, Database, Shield } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { certifications } from '@/data/certifications'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 
 const iconMap: Record<string, React.ElementType> = {
-  Cloud, Server, Brain, GitBranch, Code, Award,
+  Cloud, Server, Brain, GitBranch, Code, Award, Database, Shield,
 }
 
 export function Certifications() {

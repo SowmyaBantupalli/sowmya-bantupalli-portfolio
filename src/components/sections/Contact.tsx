@@ -12,35 +12,35 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'sowmya.bantupalli@email.com',
-    href: 'mailto:sowmya.bantupalli@email.com',
+    value: 'sowmya.bantupalli1@gmail.com',
+    href: 'mailto:sowmya.bantupalli1@gmail.com',
     color: '#6366f1',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/sowmya-bantupalli',
-    href: 'https://linkedin.com/in/sowmya-bantupalli',
+    value: 'linkedin.com/in/sowmya-b-9a3a16240',
+    href: 'https://www.linkedin.com/in/sowmya-b-9a3a16240',
     color: '#0a66c2',
   },
   {
     icon: Github,
     label: 'GitHub',
-    value: 'github.com/sowmya-bantupalli',
-    href: 'https://github.com/sowmya-bantupalli',
+    value: 'github.com/SowmyaBantupalli',
+    href: 'https://github.com/SowmyaBantupalli',
     color: '#e2e8f0',
   },
   {
     icon: MapPin,
     label: 'Location',
-    value: 'Remote (US / India)',
+    value: 'Mississauga, ON · Canada',
     href: undefined,
     color: '#10b981',
   },
   {
     icon: Clock,
-    label: 'Availability',
-    value: 'Mon–Fri, 9am–6pm EST',
+    label: 'Work Authorization',
+    value: 'Permanent Resident of Canada',
     href: undefined,
     color: '#f59e0b',
   },
@@ -244,14 +244,15 @@ export function Contact() {
               variants={fadeInLeft}
               className="p-5 rounded-2xl bg-gradient-to-br from-brand-500/10 via-accent-violet/5 to-transparent border border-brand-500/20"
             >
-              <p className="text-white font-semibold mb-1">Open to remote opportunities</p>
+              <p className="text-white font-semibold mb-1">Open to opportunities in Canada</p>
               <p className="text-dark-400 text-sm leading-relaxed">
-                Senior Frontend, React Lead, or Frontend Architect roles. Available for US time zones.
+                Senior Frontend Engineer, React/Angular Lead, or Frontend Architect roles.
+                Permanent Resident — no sponsorship required.
               </p>
               <div className="flex items-center gap-2 mt-3">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-emerald-400 text-sm font-medium">
-                  Actively interviewing
+                  Actively looking
                 </span>
               </div>
             </motion.div>
