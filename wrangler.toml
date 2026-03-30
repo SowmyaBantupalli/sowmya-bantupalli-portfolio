@@ -1,0 +1,10 @@
+name = "sowmya-bantupalli-portfolio"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "sowmya-bantupalli-portfolio"
+
+# Cloudflare Pages configuration
+# Build command: npm run build
+# Build output directory: dist
+pages_build_output_dir = "dist"
