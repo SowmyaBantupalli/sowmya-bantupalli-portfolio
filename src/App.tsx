@@ -101,11 +101,11 @@ export default function App() {
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>
-                <Projects />
+                <Certifications />
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>
-                <Certifications />
+                <Projects />
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>

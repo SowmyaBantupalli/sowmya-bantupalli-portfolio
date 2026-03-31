@@ -1,44 +1,8 @@
-import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Briefcase, Coffee, Zap } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { GlassCard } from '@/components/ui/GlassCard'
-import { useScrollInView } from '@/hooks/useScrollInView'
-import { useAnimatedCounter } from '@/hooks/useAnimatedCounter'
 import { fadeInLeft, fadeInRight, staggerContainer } from '@/lib/animations'
-
-interface StatCardProps {
-  value: number
-  suffix: string
-  prefix?: string
-  label: string
-  color: string
-  isActive: boolean
-}
-
-function StatCard({ value, suffix, prefix = '', label, color, isActive }: StatCardProps) {
-  const { count, start } = useAnimatedCounter({ end: value, duration: 2200, easing: 'easeOut' })
-
-  useEffect(() => {
-    if (isActive) start()
-  }, [isActive])
-
-  return (
-    <div className="flex flex-col items-center gap-1 p-4">
-      <span className="text-4xl md:text-5xl font-black" style={{ color }}>
-        {prefix}{count}{suffix}
-      </span>
-      <span className="text-dark-400 text-sm font-medium text-center">{label}</span>
-    </div>
-  )
-}
-
-const stats = [
-  { value: 8, suffix: '+', label: 'Years Experience', color: '#6366f1' },
-  { value: 50, suffix: '+', label: 'Projects Delivered', color: '#8b5cf6' },
-  { value: 15, suffix: '+', label: 'Enterprise Clients', color: '#06b6d4' },
-  { value: 99, suffix: '%', label: 'Client Satisfaction', color: '#10b981' },
-]
 
 const highlights = [
   {
@@ -67,9 +31,19 @@ const highlights = [
   },
 ]
 
-export function About() {
-  const { ref: sectionRef, isInView } = useScrollInView<HTMLDivElement>({ threshold: 0.2 })
+const coreStack = [
+  { name: 'React', color: '#61dafb', bg: 'rgba(97,218,251,0.1)' },
+  { name: 'Angular', color: '#dd0031', bg: 'rgba(221,0,49,0.1)' },
+  { name: 'TypeScript', color: '#3178c6', bg: 'rgba(49,120,198,0.1)' },
+  { name: 'Redux', color: '#764abc', bg: 'rgba(118,74,188,0.1)' },
+  { name: 'Azure', color: '#0078d4', bg: 'rgba(0,120,212,0.1)' },
+  { name: 'AWS', color: '#ff9900', bg: 'rgba(255,153,0,0.1)' },
+  { name: 'Docker', color: '#2496ed', bg: 'rgba(36,150,237,0.1)' },
+  { name: 'GraphQL', color: '#e10098', bg: 'rgba(225,0,152,0.1)' },
+  { name: 'Node.js', color: '#339933', bg: 'rgba(51,153,51,0.1)' },
+]
 
+export function About() {
   return (
     <section id="about" className="py-24 lg:py-32 bg-dark-950 relative overflow-hidden">
       {/* Background decoration */}
@@ -86,7 +60,7 @@ export function About() {
           description="I'm a passionate Senior Frontend Developer with 8+ years of experience building enterprise-grade applications that scale. I specialize in creating seamless user experiences backed by clean, maintainable architecture."
         />
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: Profile content */}
           <motion.div
             variants={staggerContainer}
@@ -95,7 +69,7 @@ export function About() {
             viewport={{ once: true, margin: '-50px' }}
             className="space-y-6"
           >
-            {/* Profile photo (mobile/left column) */}
+            {/* Profile photo + name */}
             <motion.div variants={fadeInLeft} className="flex items-center gap-5">
               <div className="w-20 h-20 rounded-2xl ring-2 ring-brand-500/40 overflow-hidden flex-shrink-0 shadow-glow">
                 <img
@@ -104,9 +78,12 @@ export function About() {
                   className="w-full h-full object-cover object-top"
                   onError={(e) => {
                     const t = e.currentTarget
-                    t.style.display = 'none'
-                    t.parentElement!.innerHTML =
-                      '<div class="w-full h-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-white text-2xl font-black">SB</div>'
+                    t.src = '/profile.svg'
+                    t.onerror = () => {
+                      t.style.display = 'none'
+                      t.parentElement!.innerHTML =
+                        '<div class="w-full h-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-white text-2xl font-black">SB</div>'
+                    }
                   }}
                 />
               </div>
@@ -177,42 +154,19 @@ export function About() {
             </motion.div>
           </motion.div>
 
-          {/* Right: Stats and visual */}
+          {/* Right: Core Stack */}
           <motion.div
             variants={fadeInRight}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="space-y-6"
           >
-            {/* Stats grid */}
-            <div ref={sectionRef}>
-              <GlassCard className="p-2" hover={false}>
-                <div className="grid grid-cols-2 divide-x divide-y divide-dark-700/50">
-                  {stats.map((stat) => (
-                    <StatCard key={stat.label} {...stat} isActive={isInView} />
-                  ))}
-                </div>
-              </GlassCard>
-            </div>
-
-            {/* Tech logos grid */}
             <GlassCard className="p-6" hover={false}>
               <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
                 Core Stack
               </h4>
               <div className="grid grid-cols-3 gap-3">
-                {[
-                  { name: 'React', color: '#61dafb', bg: 'rgba(97,218,251,0.1)' },
-                  { name: 'Angular', color: '#dd0031', bg: 'rgba(221,0,49,0.1)' },
-                  { name: 'TypeScript', color: '#3178c6', bg: 'rgba(49,120,198,0.1)' },
-                  { name: 'Redux', color: '#764abc', bg: 'rgba(118,74,188,0.1)' },
-                  { name: 'Azure', color: '#0078d4', bg: 'rgba(0,120,212,0.1)' },
-                  { name: 'AWS', color: '#ff9900', bg: 'rgba(255,153,0,0.1)' },
-                  { name: 'Docker', color: '#2496ed', bg: 'rgba(36,150,237,0.1)' },
-                  { name: 'GraphQL', color: '#e10098', bg: 'rgba(225,0,152,0.1)' },
-                  { name: 'Node.js', color: '#339933', bg: 'rgba(51,153,51,0.1)' },
-                ].map(({ name, color, bg }) => (
+                {coreStack.map(({ name, color, bg }) => (
                   <motion.div
                     key={name}
                     className="flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl border border-dark-700/50 cursor-default"
@@ -220,10 +174,7 @@ export function About() {
                     whileHover={{ scale: 1.05, borderColor: `${color}50` }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: color }}
-                    />
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
                     <span className="text-xs font-medium text-dark-300">{name}</span>
                   </motion.div>
                 ))}
