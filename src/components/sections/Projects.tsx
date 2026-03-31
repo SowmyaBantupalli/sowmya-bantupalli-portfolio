@@ -202,11 +202,28 @@ export function Projects() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          eyebrow="Featured Projects"
-          title="Enterprise-grade"
-          titleHighlight="production work"
-          description="A selection of real-world applications I've architected and delivered — each solving complex business problems at scale."
+          eyebrow="Side Projects"
+          title="Personal"
+          titleHighlight="hobby projects"
+          description="Independent projects built to explore technologies and sharpen skills."
         />
+
+        {/* Disclaimer */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mb-10 flex justify-center"
+        >
+          <div className="inline-flex items-start gap-2 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400 text-sm max-w-xl text-center">
+            <span className="mt-0.5 flex-shrink-0">ℹ</span>
+            <span>
+              These are personal / hobby projects and are <strong>not</strong> part of my
+              professional work history.
+            </span>
+          </div>
+        </motion.div>
 
         {/* Filter tabs */}
         <motion.div

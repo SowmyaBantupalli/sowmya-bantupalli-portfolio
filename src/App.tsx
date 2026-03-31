@@ -74,7 +74,7 @@ export default function App() {
       <ThemeInitializer />
       <ActiveSectionTracker />
 
-      <div className="min-h-screen bg-dark-950 dark:bg-dark-950 transition-colors duration-300">
+      <div className="min-h-screen bg-slate-100 dark:bg-dark-950 transition-colors duration-300">
         <Navbar />
 
         <main id="main-content" role="main">
@@ -97,11 +97,11 @@ export default function App() {
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>
-                <Projects />
+                <Experience />
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>
-                <Experience />
+                <Projects />
               </Suspense>
 
               <Suspense fallback={<SectionLoader />}>

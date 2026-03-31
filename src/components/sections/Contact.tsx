@@ -129,7 +129,7 @@ export function Contact() {
                     size="md"
                     as="a"
                     href="/Sowmya_Bantupalli_Resume.pdf"
-                    target="_blank"
+                    download="Sowmya_Bantupalli_Resume.pdf"
                     rel="noopener noreferrer"
                     leftIcon={<Download className="w-4 h-4" />}
                   >

@@ -154,13 +154,19 @@ export function Hero() {
             <div className="w-28 h-28 rounded-full ring-4 ring-brand-500/40 ring-offset-4 ring-offset-dark-950 overflow-hidden shadow-glow">
               <img
                 src="/profile.jpg"
-                alt="Sowmya Bantupalli"
+                alt="Sowmya Bantupalli — Senior Frontend Engineer"
+                width={112}
+                height={112}
                 className="w-full h-full object-cover object-top"
                 onError={(e) => {
+                  // Fall back to SVG placeholder if profile.jpg is not present
                   const t = e.currentTarget
-                  t.style.display = 'none'
-                  t.parentElement!.innerHTML =
-                    '<div class="w-full h-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-white text-3xl font-black">SB</div>'
+                  t.src = '/profile.svg'
+                  t.onerror = () => {
+                    t.style.display = 'none'
+                    t.parentElement!.innerHTML =
+                      '<div class="w-full h-full bg-gradient-to-br from-brand-500 to-accent-violet flex items-center justify-center text-white text-3xl font-black">SB</div>'
+                  }
                 }}
               />
             </div>
@@ -232,7 +238,7 @@ export function Hero() {
               size="xl"
               as="a"
               href="/Sowmya_Bantupalli_Resume.pdf"
-              target="_blank"
+              download="Sowmya_Bantupalli_Resume.pdf"
               rel="noopener noreferrer"
               leftIcon={<Download className="w-5 h-5" />}
               className="min-w-[180px]"

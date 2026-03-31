@@ -15,6 +15,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string
   target?: string
   rel?: string
+  download?: string | boolean
 }
 
 const variants: Record<ButtonVariant, string> = {
@@ -52,6 +53,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       href,
       target,
       rel,
+      download,
       ...props
     },
     ref
@@ -63,7 +65,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const componentProps =
       as === 'a'
-        ? { href, target, rel }
+        ? { href, target, rel, download }
         : { ref, type: 'button', disabled: disabled || isLoading, ...props }
 
     return (
